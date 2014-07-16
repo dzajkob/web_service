@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="greetings" 
+targetNamespace="http://localhost/web_service/sayHello"
+xmlns:tns="http://localhost/web_service/sayHello" 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+xmlns="http://schemas.xmlsoap.org/wsdl/">
+	<!-- Definicje kounikatów - czyli co może przyjść na nasz serwic i z niego wyjść -->
+		
+		<!-- Funkcja sayHello in ServiceFunction.php -->
+			<message name="sayHelloRequest">
+				<!-- Parametry jakie przyjmuje funckja -->
+				<part name="name" type="xsd:string"/>
+			</message>
+			<!-- Odpowiedź funckji sayHello: -->
+			<message name="sayHelloResponse">
+				<!-- Parametry jakie zwraca funkcja-->
+				<part name="salutation" type="xsd:string"/>
+			</message>
+		<!-- END -->
+		
+	<!-- END -->
+	
+	<!-- Definicja portów (interfejsów) czyli dla każdej operacji jaki jest intput i output -->
+		<portType name="sayHelloPortType">
+			<operation name="sayHello">
+				<input message="tns:sayHelloRequest"/>
+				<output message="tns:sayHelloResponse"/>
+			</operation>
+		</portType>
+	<!-- END -->
+	
+	<!-- Definicja wiązania z protkołem transportowym -->
+		<binding name="sayHelloBinding" type="tns:sayHelloPortType">
+			<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+			<operation name="sayHello">
+				<soap:operation soapAction=""/>
+				<input>
+					<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+				</input>
+				<output>
+					<soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+				</output>
+			</operation>
+		</binding>
+	<!-- END -->
+	
+	<!-- definicja lokalizacji usług sieciowych -->
+		<service name="sayHelloService">
+			<documentation>Serwer podstawowy by J.Wojnik</documentation>
+			<port name="sayHelloPort" binding="tns:sayHelloBinding">
+				<soap:address location="http://localhost/web_service/Service.php"/>
+			</port>
+		</service>
+	<!-- END -->
+	
+</definitions>
