@@ -6,17 +6,17 @@ Simple soap. Use wsdl. To use must change some url in wsdl.
 URL to change in wsdl:
 
 Line 3:
-  
+   
   From: targetNamespace="http://localhost/web_service/sayHello" 
   to : targetNamespace="your_url_location_web_service_file/sayHello"
 
 Line 4:
-  
+   
   From: xmlns:tns='http://localhost/web_service/sayHello'  
   to : xmlns:tns='your_url_location_web_service_file/sayHello'
 
 Line 54:
-
+ 
   From: location="http://localhost/web_service/Service.php" 
   to : location="your_url_location_web_service_file/Service.php"
 
